@@ -1,12 +1,12 @@
-# MobMon12 Hardware Design Repository
+# MobMon Fold Hardware Design Repository
 
-**Project:** MobMon12 Medical Monitoring Device - Hardware Design
+**Project:** MobMon Fold Medical Monitoring Device - Hardware Design
 **Organization:** Kallows Engineering India Pvt Ltd
 **KiCAD Version:** 9.0
 
 ## Overview
 
-This repository contains the PCB design files, libraries, and hardware-specific documentation for the MobMon12 medical monitoring device. This repository provides **Design Output** documentation that feeds into the larger Design History File (DHF) maintained separately.
+This repository contains the PCB design files, libraries, and hardware-specific documentation for the MobMon Fold medical monitoring device. This repository provides **Design Output** documentation that feeds into the larger Design History File (DHF) maintained separately.
 
 ### What's In This Repository
 - ✅ KiCAD PCB design files (schematics, layouts)
@@ -27,7 +27,7 @@ This repository contains the PCB design files, libraries, and hardware-specific 
 ## Repository Structure
 
 ```
-mobmon12-hardware/
+mobmon-fold-hardware/
 ├── hardware/          # PCB design files (KiCAD projects)
 ├── libraries/         # Shared component libraries
 ├── mechanical/        # CAD files for enclosures and covers
@@ -42,39 +42,32 @@ mobmon12-hardware/
 
 | I want to... | Go to... |
 |--------------|----------|
-| Open the latest mainboard design | `hardware/mainboard/latest/` |
+| Open the latest fold design | `hardware/fold/latest/` |
 | Find a component footprint | `libraries/footprints/` |
 | Generate manufacturing files | See `tools/fabrication/` |
 | View test reports | `docs/verification/test_reports/` |
 | Find design calculations | `docs/design/calculations/` |
-| Access gerber files | `manufacturing/mainboard/[revision]/gerbers/` |
+| Access gerber files | `manufacturing/fold/[revision]/gerbers/` |
 
 ---
 
 ## Hardware Boards
 
-### Mainboard (mobmon12_mainboard)
-Main monitoring unit with ECG acquisition, processing, and connectivity.
+### Fold Board (mobmon_fold)
+Main monitoring unit with ECG acquisition, audio processing, IMU, and wireless connectivity.
 
-**Latest Revision:** rev06a → `hardware/mainboard/latest/`
+**Latest Revision:** rev01a → `hardware/fold/latest/`
 
 | Revision | Status | Notes |
 |----------|--------|-------|
-| rev06b | Development | Latest features |
-| rev06a | Released | Current production |
-| rev05b | Released | Previous generation |
-| rev05a | Released | First 05 series |
-| rev04 | Archived | Prototype only |
+| rev01a | Development | Initial revision with ECG, audio, and nRF52840 |
 
-### Yoke Board (mobmon12_yoke)
-Connector/interface board for patient connections.
-
-**Latest Revision:** rev02c → `hardware/yoke/latest/`
-
-### Defibrillator Board (mobmon12_defib)
-Defibrillator interface module.
-
-**Latest Revision:** rev01a → `hardware/defib/latest/`
+**Features:**
+- ECG signal acquisition (ADS1294)
+- Audio processing (TLV320ADC6140)
+- Nordic nRF52840 wireless MCU
+- IMU sensor (BMX160)
+- 6-layer PCB design
 
 ---
 
@@ -88,12 +81,12 @@ Defibrillator interface module.
 ### Opening a Project
 1. Navigate to the desired board and revision:
    ```bash
-   cd hardware/mainboard/latest/
+   cd hardware/fold/latest/
    ```
 
 2. Open the project file in KiCAD:
    ```bash
-   kicad mobmon12_mainboard.kicad_pro
+   kicad "mobmon fold.kicad_pro"
    ```
 
 3. Libraries are automatically loaded from `libraries/` directory
@@ -102,7 +95,7 @@ Defibrillator interface module.
 
 1. Copy the template:
    ```bash
-   cp -r config/templates/revision_template hardware/mainboard/rev07a
+   cp -r config/templates/revision_template hardware/fold/rev02a
    ```
 
 2. Copy files from previous revision
@@ -110,7 +103,7 @@ Defibrillator interface module.
 4. Update `DESIGN_NOTES.md` with changes
 5. Update symlink when ready for development:
    ```bash
-   ln -sf rev07a hardware/mainboard/latest
+   ln -sf rev02a hardware/fold/latest
    ```
 
 ---
@@ -143,7 +136,7 @@ Engineering Change Orders (ECOs) tracking all design changes
 Use the automated script:
 ```bash
 cd tools/fabrication
-python generate_manufacturing_outputs.py --board mainboard --revision rev06a
+python generate_manufacturing_outputs.py --board fold --revision rev01a
 ```
 
 This generates:

@@ -1,6 +1,6 @@
 # Component Libraries
 
-This directory contains all shared component libraries used across MobMon12 hardware designs.
+This directory contains all shared component libraries used across MobMon Fold hardware designs.
 
 ## Directory Structure
 

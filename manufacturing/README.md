@@ -6,24 +6,14 @@ This directory contains all production-ready manufacturing outputs (gerbers, BOM
 
 ```
 manufacturing/
-├── mainboard/
-│   ├── rev06a/
-│   │   ├── gerbers/              # Gerber files
-│   │   ├── assembly/             # BOM, placement, assembly docs
-│   │   ├── fabrication/          # Fab notes, stackup
-│   │   ├── panels/               # Panelized design (if applicable)
-│   │   ├── documentation/        # Schematic PDFs, assembly drawings
-│   │   └── RELEASE_MANIFEST.md   # Release documentation
-│   └── rev06b/
-│
-├── yoke/
-│   └── rev02c/
-│
-├── defib/
-│   └── rev01a/
-│
-└── panels/                       # Multi-board panelization
-    └── mainboard_yoke_panel_v1/
+└── fold/
+    └── rev01a/
+        ├── gerbers/              # Gerber files
+        ├── assembly/             # BOM, placement, assembly docs
+        ├── fabrication/          # Fab notes, stackup
+        ├── panels/               # Panelized design (if applicable)
+        ├── documentation/        # Schematic PDFs, assembly drawings
+        └── RELEASE_MANIFEST.md   # Release documentation
 ```
 
 ---
@@ -33,7 +23,7 @@ manufacturing/
 ### Gerbers Directory (`gerbers/`)
 
 **Contents:**
-- `[board]_[revision]_gerbers.zip` - Complete gerber package
+- `fold_[revision]_gerbers.zip` - Complete gerber package
 - `checksum.md5` - MD5 checksum for verification
 - Individual gerber files (optional, usually zipped)
 
@@ -80,7 +70,7 @@ CSV format with component positions:
 Designator,X,Y,Rotation,Layer,Value
 C1,10.5,20.3,0,Top,100nF
 R1,15.2,22.1,90,Top,10k
-U1,50.0,50.0,0,Top,MSP432E401Y
+U1,50.0,50.0,0,Top,NRF52840-QIAA-R
 ```
 
 **Coordinate System:**
@@ -97,10 +87,10 @@ U1,50.0,50.0,0,Top,MSP432E401Y
 
 **Example fab_notes.md:**
 ```markdown
-# Fabrication Notes: Mainboard Rev06a
+# Fabrication Notes: Fold Rev01a
 
 ## PCB Specifications
-- **Layers:** 4
+- **Layers:** 6
 - **Thickness:** 1.6mm ± 10%
 - **Material:** FR-4, Tg 170°C
 - **Copper Weight:** 1oz (35µm) outer, 0.5oz (17.5µm) inner
@@ -151,7 +141,7 @@ Documents what was released and manufacturing details.
 # Manufacturing Release: [Board] [Revision]
 
 ## Release Information
-- **Release Number:** [Board]-[Rev]-Release-v1.0
+- **Release Number:** Fold-Rev01a-Release-v1.0
 - **Release Date:** YYYY-MM-DD
 - **Released By:** [Name]
 - **Approved By:** [Name]
@@ -159,24 +149,24 @@ Documents what was released and manufacturing details.
 - **Package Checksum (MD5):** [hash]
 
 ## Board Information
-- **Board:** Mainboard
-- **Revision:** rev06a
-- **PCB Part Number:** MB-06A-001
-- **Assembly Part Number:** MB-06A-001-ASSY
+- **Board:** Fold
+- **Revision:** rev01a
+- **PCB Part Number:** FOLD-01A-001
+- **Assembly Part Number:** FOLD-01A-001-ASSY
 
 ## Design Files
 - **KiCAD Version:** 9.0
-- **Source Location:** hardware/mainboard/rev06a/
+- **Source Location:** hardware/fold/rev01a/
 - **Git Commit:** [commit hash]
-- **Git Tag:** mainboard-rev06a-release-v1.0
+- **Git Tag:** fold-rev01a-release-v1.0
 
 ## Manufacturing Outputs
-- ✓ Gerbers: mainboard_rev06a_gerbers.zip
-- ✓ BOM: bom_rev06a.xlsx, bom_rev06a.csv
-- ✓ CPL: cpl_rev06a.csv
+- ✓ Gerbers: fold_rev01a_gerbers.zip
+- ✓ BOM: bom_rev01a.xlsx, bom_rev01a.csv
+- ✓ CPL: cpl_rev01a.csv
 - ✓ Interactive BOM: ibom.html
 - ✓ Stackup: stackup.pdf
-- ✓ Schematics: schematic_rev06a.pdf
+- ✓ Schematics: schematic_rev01a.pdf
 - ✓ Assembly Drawings: layout_assembly_top/bottom.pdf
 
 ## Changes from Previous Revision
@@ -185,7 +175,7 @@ Documents what was released and manufacturing details.
 - See ECO-017: Moved U5 for better thermal performance
 
 ## Verification Status
-- ✓ Electrical Safety: PASSED (report: docs/verification/test_reports/mainboard_rev06a/electrical_safety_report.md)
+- ✓ Electrical Safety: PASSED (report: docs/verification/test_reports/fold_rev01a/electrical_safety_report.md)
 - ✓ Functional Test: PASSED
 - ✓ EMC Pre-test: PASSED with notes
 
@@ -232,7 +222,7 @@ Use the provided script:
 
 ```bash
 cd tools/fabrication
-python generate_manufacturing_outputs.py --board mainboard --revision rev06a
+python generate_manufacturing_outputs.py --board fold --revision rev01a
 ```
 
 This script:
@@ -327,7 +317,7 @@ Check:
 **BOM Verification:**
 ```bash
 cd tools/bom
-python bom_validator.py --bom manufacturing/mainboard/rev06a/assembly/bom_rev06a.xlsx
+python bom_validator.py --bom manufacturing/fold/rev01a/assembly/bom_rev01a.xlsx
 ```
 
 Check:
@@ -350,9 +340,9 @@ Check:
 Format: `[Board]-[Revision]-Release-v[X.Y]`
 
 Examples:
-- `Mainboard-rev06a-Release-v1.0` - Initial release
-- `Mainboard-rev06a-Release-v1.1` - Corrected BOM (no design change)
-- `Mainboard-rev06b-Release-v1.0` - New board revision
+- `Fold-rev01a-Release-v1.0` - Initial release
+- `Fold-rev01a-Release-v1.1` - Corrected BOM (no design change)
+- `Fold-rev01b-Release-v1.0` - New board revision
 
 **When to increment:**
 - **Major (v1.0 → v2.0):** New board revision
@@ -361,8 +351,8 @@ Examples:
 ### Git Tags
 Tag each manufacturing release:
 ```bash
-git tag -a mainboard-rev06a-release-v1.0 -m "Mainboard Rev06a Manufacturing Release v1.0"
-git push origin mainboard-rev06a-release-v1.0
+git tag -a fold-rev01a-release-v1.0 -m "Fold Rev01a Manufacturing Release v1.0"
+git push origin fold-rev01a-release-v1.0
 ```
 
 ---

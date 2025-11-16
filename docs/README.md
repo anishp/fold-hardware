@@ -1,6 +1,6 @@
 # Hardware Documentation
 
-This directory contains all hardware-specific documentation for the MobMon12 PCB designs. This documentation feeds into the larger Design History File (DHF) maintained separately.
+This directory contains all hardware-specific documentation for the MobMon Fold PCB designs. This documentation feeds into the larger Design History File (DHF) maintained separately.
 
 ## Directory Structure
 
