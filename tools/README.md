@@ -22,7 +22,7 @@ tools/
 **Usage:**
 ```bash
 cd tools/bom
-python kallows_bom_search.py --bom ../../manufacturing/mainboard/rev06a/assembly/bom_rev06a.csv
+python kallows_bom_search.py --bom ../../manufacturing/fold/rev01a/assembly/bom_rev01a.csv
 ```
 
 **Configuration:**
@@ -40,7 +40,7 @@ python kallows_bom_search.py --bom ../../manufacturing/mainboard/rev06a/assembly
 
 **Usage:**
 ```bash
-python bom_validator.py --bom ../../manufacturing/mainboard/rev06a/assembly/bom_rev06a.xlsx
+python bom_validator.py --bom ../../manufacturing/fold/rev01a/assembly/bom_rev01a.xlsx
 ```
 
 **Checks:**
@@ -102,16 +102,13 @@ python panelize_multiple.py --config panelize_config.yaml
 **Configuration: panelize_config.yaml**
 ```yaml
 panel:
-  output: "../../manufacturing/panels/mainboard_yoke_panel_v1/panel.kicad_pcb"
+  output: "../../manufacturing/panels/fold_panel_v1/panel.kicad_pcb"
   size: [200, 150]  # mm
 
 boards:
-  - path: "../../hardware/mainboard/rev06a/mobmon12_mainboard.kicad_pcb"
-    count: 2
-    spacing: 5  # mm
-  - path: "../../hardware/yoke/rev02c/mobmon12_yoke.kicad_pcb"
+  - path: "../../hardware/fold/rev01a/mobmon fold.kicad_pcb"
     count: 4
-    spacing: 5
+    spacing: 5  # mm
 
 framing:
   type: "railstb"  # rails top/bottom
@@ -161,7 +158,7 @@ kikit panelize \
 **Usage:**
 ```bash
 cd tools/fabrication
-python generate_manufacturing_outputs.py --board mainboard --revision rev06a
+python generate_manufacturing_outputs.py --board fold --revision rev01a
 ```
 
 **Generates:**
@@ -199,7 +196,7 @@ openpyxl>=3.0.10
 
 **Usage:**
 ```bash
-python validate_design.py --board mainboard --revision rev06a
+python validate_design.py --board fold --revision rev01a
 ```
 
 **Checks:**
@@ -225,7 +222,7 @@ python validate_design.py --board mainboard --revision rev06a
 
 **Output:**
 ```
-Design Validation Report: Mainboard Rev06a
+Design Validation Report: Fold Rev01a
 ==========================================
 
 Electrical Rules Check:
@@ -259,7 +256,7 @@ Summary:
 
 **Usage:**
 ```bash
-python generate_release_package.py --board mainboard --revision rev06a --output mainboard_rev06a_release_v1.0.zip
+python generate_release_package.py --board fold --revision rev01a --output fold_rev01a_release_v1.0.zip
 ```
 
 **Package Contents:**
@@ -278,15 +275,15 @@ python generate_release_package.py --board mainboard --revision rev06a --output 
 **Usage:**
 ```bash
 cd tools/traceability
-python generate_bom_traceability.py --board mainboard --revision rev06a
+python generate_bom_traceability.py --board fold --revision rev01a
 ```
 
-**Output:** `bom_traceability_rev06a.xlsx`
+**Output:** `bom_traceability_rev01a.xlsx`
 
 | Component | MPN | Function | Related Requirement | Related Risk | Verification |
 |-----------|-----|----------|---------------------|--------------|--------------|
-| U1 | MSP432E401Y | Microcontroller | REQ-SYS-001 | RISK-SW-001 | VER-FUNC-001 |
-| U3 | ISO124 | Isolation Amp | REQ-SAFE-001 | RISK-HW-001 | VER-ISO-001 |
+| U1 | NRF52840-QIAA-R | Wireless MCU | REQ-SYS-001 | RISK-SW-001 | VER-FUNC-001 |
+| U2 | ADS1294 | ECG AFE | REQ-ECG-001 | RISK-HW-001 | VER-ECG-001 |
 
 **Purpose:** For regulatory submissions showing how hardware implements safety requirements.
 
@@ -445,7 +442,7 @@ jobs:
       - name: Validate design
         run: |
           cd tools/fabrication
-          python validate_design.py --board mainboard --revision rev06a
+          python validate_design.py --board fold --revision rev01a
 ```
 
 ---

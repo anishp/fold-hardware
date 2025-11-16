@@ -1,60 +1,30 @@
 # Hardware Design Files
 
-This directory contains all KiCAD PCB design files for the MobMon12 project boards.
+This directory contains all KiCAD PCB design files for the MobMon Fold project boards.
 
 ## Directory Structure
 
 ```
 hardware/
-├── mainboard/          # Main monitoring board (mobmon12_mainboard)
-│   ├── latest -> rev06a/
-│   ├── rev04/
-│   ├── rev05a/
-│   ├── rev05b/
-│   ├── rev06a/
-│   └── rev06b/
-│
-├── yoke/               # Yoke/connector board (mobmon12_yoke)
-│   ├── latest -> rev02c/
-│   ├── rev01a/
-│   ├── rev01b/
-│   └── rev02c/
-│
-└── defib/              # Defibrillator interface board
+└── fold/               # Main monitoring board (mobmon_fold)
     ├── latest -> rev01a/
     └── rev01a/
 ```
 
 ## Board Types
 
-### Mainboard
-**Purpose:** Main patient monitoring unit
+### Fold Board
+**Purpose:** Main patient monitoring unit with integrated audio and wireless capabilities
 **Features:**
-- ECG signal acquisition and conditioning
-- MSP432E401Y microcontroller
-- USB interface
-- Power supply management
-- JTAG programming interface
+- ECG signal acquisition and conditioning (ADS1294)
+- Audio signal processing (TLV320ADC6140)
+- Nordic nRF52840 wireless MCU with BLE
+- IMU sensor (BMX160) for motion tracking
+- Tag-Connect programming interface
+- U.FL antenna connector
+- 6-layer PCB design with controlled impedance
 
-**Current Production:** rev06a
-**Active Development:** rev06b
-
-### Yoke
-**Purpose:** Connector/interface board for patient connections
-**Features:**
-- ECG electrode connectors
-- Signal conditioning
-- Patient isolation
-
-**Current Production:** rev02c
-
-### Defib
-**Purpose:** Defibrillator interface module
-**Features:**
-- Defibrillator pulse detection
-- Isolation and protection
-
-**Current Production:** rev01a
+**Current Development:** rev01a
 
 ## Revision Naming Convention
 
@@ -73,9 +43,9 @@ Examples:
 ## Files in Each Revision Directory
 
 ### Required Files
-- `mobmon12_[board].kicad_pro` - Project file
-- `mobmon12_[board].kicad_sch` - Top-level schematic
-- `mobmon12_[board].kicad_pcb` - PCB layout
+- `mobmon fold.kicad_pro` - Project file
+- `mobmon fold.kicad_sch` - Top-level schematic
+- `mobmon fold.kicad_pcb` - PCB layout
 - `DESIGN_NOTES.md` - Design documentation
 - `VERIFICATION_SUMMARY.md` - Test results summary
 - `metadata.json` - Machine-readable metadata
@@ -94,8 +64,8 @@ Examples:
 
 ### Opening a Design
 ```bash
-cd hardware/mainboard/latest/
-kicad mobmon12_mainboard.kicad_pro
+cd hardware/fold/latest/
+kicad "mobmon fold.kicad_pro"
 ```
 
 ### Creating a New Revision
@@ -106,8 +76,8 @@ kicad mobmon12_mainboard.kicad_pro
 
 2. **Copy from previous revision:**
    ```bash
-   cd hardware/mainboard/
-   cp -r rev06a rev06b
+   cd hardware/fold/
+   cp -r rev01a rev01b
    ```
 
 3. **Update documentation:**
@@ -125,22 +95,19 @@ kicad mobmon12_mainboard.kicad_pro
 ### Archiving Old Revisions
 Revisions that are obsolete and no longer in use can be moved to `archive/`:
 ```bash
-mv hardware/mainboard/rev01 ../archive/old_revisions/mainboard_rev01
+mv hardware/fold/rev01 ../archive/old_revisions/fold_rev01
 ```
 
 ## Hierarchical Schematics
 
-Mainboard designs use hierarchical schematics with multiple sheets:
+Fold board design uses hierarchical schematics with multiple sheets:
 
 | Sheet | Purpose |
 |-------|---------|
-| `mobmon12_mainboard.kicad_sch` | Top-level (connects all sheets) |
-| `ECG.kicad_sch` | ECG analog frontend |
-| `ECG_CONNECTOR.kicad_sch` | ECG connector interface |
-| `POWER_SUPPLY.kicad_sch` | Power supply circuitry |
-| `STELLARIS_MCU.kicad_sch` | Microcontroller (MSP432E401Y) |
-| `USB_INTERFACE.kicad_sch` | USB connectivity |
-| `JTAG.kicad_sch` | JTAG programming interface |
+| `mobmon fold.kicad_sch` | Top-level (connects all sheets) |
+| `ECG.kicad_sch` | ECG analog frontend (ADS1294) |
+| `Audio.kicad_sch` | Audio signal processing (TLV320ADC6140) |
+| `MCU.kicad_sch` | Wireless microcontroller (nRF52840) and IMU |
 
 ## Libraries
 
@@ -161,7 +128,7 @@ Before committing changes, validate your design:
 
 ```bash
 cd tools/fabrication
-python validate_design.py --board mainboard --revision rev06b
+python validate_design.py --board fold --revision rev01a
 ```
 
 This runs:
@@ -181,16 +148,16 @@ When a revision is ready for manufacturing:
 2. **Generate manufacturing outputs**
    ```bash
    cd tools/fabrication
-   python generate_manufacturing_outputs.py --board mainboard --revision rev06a
+   python generate_manufacturing_outputs.py --board fold --revision rev01a
    ```
 
 3. **Create release manifest**
-   - Complete `manufacturing/mainboard/rev06a/RELEASE_MANIFEST.md`
+   - Complete `manufacturing/fold/rev01a/RELEASE_MANIFEST.md`
 
 4. **Tag in Git**
    ```bash
-   git tag -a mainboard-rev06a-v1.0 -m "Mainboard Rev06a Release v1.0"
-   git push origin mainboard-rev06a-v1.0
+   git tag -a fold-rev01a-v1.0 -m "Fold Rev01a Release v1.0"
+   git push origin fold-rev01a-v1.0
    ```
 
 5. **Update CHANGELOG.md** at repository root
