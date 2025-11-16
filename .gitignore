@@ -1,0 +1,319 @@
+# MobMon12 Hardware Repository - Git Ignore File
+
+# ==============================================================================
+# KiCAD Generated Files
+# ==============================================================================
+
+# Project local settings (user-specific)
+*.kicad_prl
+
+# Auto-backup directories
+*-backups/
+_autosave-*
+
+# Backup files
+*.bak
+*.bck
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*.sch-bak
+
+# Footprint cache
+fp-info-cache
+
+# Symbol cache
+sym-lib-table.bck
+
+# Reports (can be regenerated)
+*-drc.rpt
+*-erc.rpt
+
+# Temporary files
+*.tmp
+*~
+
+# KiCAD lock files (created when files are open)
+*.lck
+~*.lck
+
+# ==============================================================================
+# Manufacturing Outputs (Generated - can be regenerated from source)
+# ==============================================================================
+
+# Gerber files (unless in release package)
+*.gbr
+*.gbl
+*.gtl
+*.gbs
+*.gts
+*.gbo
+*.gto
+*.gm1
+*.gm2
+*.gm3
+*.gko
+*.gpb
+*.gpt
+
+# Drill files
+*.drl
+*.txt
+*.rpt
+*.xln
+
+# Pick and place
+*.pos
+*-top.pos
+*-bottom.pos
+
+# BOM (generated)
+*.csv
+*.xml
+
+# Interactive BOM
+ibom.html
+
+# ZIP files of gerbers (unless in release directory)
+*gerbers*.zip
+
+# EXCEPTIONS: Keep release packages
+!manufacturing/**/gerbers/*.zip
+!manufacturing/**/RELEASE_MANIFEST.md
+!manufacturing/**/assembly/*.xlsx
+
+# ==============================================================================
+# Python
+# ==============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage
+.pytest_cache/
+.coverage
+.tox/
+htmlcov/
+
+# ==============================================================================
+# Configuration Files (with secrets)
+# ==============================================================================
+
+# Tool configuration with secrets
+tools/*/config.yaml
+tools/*/.env
+*.secret
+*.key
+credentials.json
+
+# EXCEPTION: Keep example configs
+!tools/*/config.example.yaml
+!config/**/*.yaml
+
+# ==============================================================================
+# Operating System Files
+# ==============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.directory
+.fuse_hidden*
+.Trash-*
+.nfs*
+
+# ==============================================================================
+# IDE / Editor Files
+# ==============================================================================
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+.history/
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+
+# ==============================================================================
+# Documentation Generated Files
+# ==============================================================================
+
+# LaTeX intermediate files (if generating PDFs from LaTeX)
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# ==============================================================================
+# Mechanical CAD
+# ==============================================================================
+
+# FreeCAD backup files
+*.FCStd1
+*.FCStd#
+*.FCBak
+
+# Temporary 3D files
+*.stl~
+*.step~
+
+# ==============================================================================
+# Logs and Databases
+# ==============================================================================
+
+*.log
+*.sql
+*.sqlite
+*.db
+
+# ==============================================================================
+# Archives and Compressed Files (except release packages)
+# ==============================================================================
+
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# EXCEPTIONS: Keep specific release archives
+!manufacturing/**/*release*.zip
+!manufacturing/**/*gerbers*.zip
+
+# ==============================================================================
+# Test Data and Temporary Files
+# ==============================================================================
+
+# Large test data files (keep metadata, not raw data)
+docs/verification/test_reports/**/test_data/*.bin
+docs/verification/test_reports/**/test_data/*.dat
+
+# Temporary directories
+tmp/
+temp/
+.tmp/
+
+# ==============================================================================
+# Project Specific
+# ==============================================================================
+
+# Old structure (will be moved to archive)
+# Uncomment these after migration is complete
+# mobmon12_prototype_rev*/
+# mobmon12_yoke_rev*/
+# mobmon12_defib/
+# kicad_panelize/
+# kikit-panelizing/
+
+# MCP agent logs
+mcp-agent-server.log
+
+# ==============================================================================
+# Keep Important Files
+# ==============================================================================
+
+# These are important - make sure they're NOT ignored
+!README.md
+!CHANGELOG.md
+!LICENSE
+!.gitignore
+!.gitattributes
+!**/DESIGN_NOTES.md
+!**/VERIFICATION_SUMMARY.md
+!**/metadata.json
+!**/RELEASE_MANIFEST.md
+!**/ECO_*.md
+
+# ==============================================================================
+# Docker
+# ==============================================================================
+
+# Docker KiCAD configuration (contains user settings and cache)
+docker/kicad-config/
+
+# Docker volumes (if any)
+docker/volumes/

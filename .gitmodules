@@ -1,0 +1,3 @@
+[submodule ".claude/skills/bom-generator"]
+	path = .claude/skills/bom-generator
+	url = git@github.com:Kallows/kicad-bom-generator-skill.git

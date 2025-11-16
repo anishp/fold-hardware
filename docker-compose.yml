@@ -1,0 +1,56 @@
+---
+# Docker Compose configuration for KiCAD v9
+# LinuxServer.io KiCAD image with web-based GUI access
+#
+# Access KiCAD at: http://localhost:3000
+# Usage:
+#   docker-compose up -d    # Start container
+#   docker-compose down     # Stop container
+#   docker-compose logs -f  # View logs
+
+services:
+  kicad:
+    image: lscr.io/linuxserver/kicad:9.0.2
+    container_name: kicad_mobmon12
+
+    # Required for some GUI features
+    security_opt:
+      - seccomp:unconfined
+
+    environment:
+      # Match your host user/group IDs to avoid permission issues
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+
+      # Optional: Customize GUI settings
+      - CUSTOM_USER=anishp
+      # - SUBFOLDER=/  # Useful if behind reverse proxy
+
+    volumes:
+      # Container config (KiCAD settings, cache, temp files)
+      - ./docker/kicad-config:/config
+
+      # Mount your KiCAD projects (READ/WRITE access)
+      # This mounts the entire KiCADv9 directory
+      - .:/projects
+
+      # Alternative: Mount individual project directories if you prefer isolation
+      # - ./mobmon12_prototype_rev06a:/projects/mobmon12_prototype_rev06a
+      # - ./mobmon12_yoke_rev02c:/projects/mobmon12_yoke_rev02c
+      # - ./kicad_panelize:/projects/kicad_panelize
+
+    ports:
+      # Web GUI access port
+      - "3000:3000"
+      # HTTPS GUI access port (optional)
+      - "3001:3001"
+
+    restart: unless-stopped
+
+    # Optional: Resource limits to prevent container from consuming too much
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '4'
+    #       memory: 4G

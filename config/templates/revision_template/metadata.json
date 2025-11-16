@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "board_name": "mobmon12_[board_type]",
+  "board_type": "mainboard | yoke | defib",
+  "revision": "revXXa",
+  "date_created": "YYYY-MM-DD",
+  "created_by": "Engineer Name",
+  "kicad_version": "9.0",
+  "status": "development",
+  "description": "Brief description of this revision",
+
+  "compliance": {
+    "iec_60601_1": "designed_for",
+    "iec_60601_1_2": "designed_for",
+    "iec_60601_2_27": "designed_for",
+    "iec_60601_2_49": "not_applicable",
+    "iso_13485": "designed_for",
+    "iso_14971": "risk_managed"
+  },
+
+  "verification_status": "not_started",
+  "verification_date": null,
+
+  "manufacturing_status": "not_released",
+  "manufacturing_releases": [],
+
+  "pcb_specifications": {
+    "layers": 4,
+    "thickness_mm": 1.6,
+    "material": "FR-4",
+    "tg": 170,
+    "copper_weight_oz": {
+      "outer": 1.0,
+      "inner": 0.5
+    },
+    "surface_finish": "ENIG",
+    "min_trace_width_mm": 0.15,
+    "min_spacing_mm": 0.15,
+    "min_drill_mm": 0.3,
+    "ipc_class": 3
+  },
+
+  "controlled_impedance": {
+    "usb_differential": {
+      "target_ohms": 90,
+      "tolerance_percent": 10
+    }
+  },
+
+  "key_components": {
+    "microcontroller": {
+      "designator": "U1",
+      "mpn": "MSP432E401Y",
+      "manufacturer": "Texas Instruments"
+    },
+    "isolation_amplifier": {
+      "designator": "U3",
+      "mpn": "ISO124",
+      "manufacturer": "Texas Instruments"
+    }
+  },
+
+  "changes_from_previous": [
+    "Change 1 description",
+    "Change 2 description"
+  ],
+
+  "related_ecos": [
+    "ECO-001",
+    "ECO-002"
+  ],
+
+  "known_issues": [
+    {
+      "id": "ISSUE-001",
+      "description": "Brief issue description",
+      "severity": "low | medium | high",
+      "workaround": "Workaround if available",
+      "plan": "How will be addressed"
+    }
+  ],
+
+  "notes": "Additional notes about this revision",
+
+  "_comments": {
+    "status_values": "development, prototype, released, obsolete",
+    "verification_status_values": "not_started, in_progress, complete",
+    "manufacturing_status_values": "not_released, prototype, in_production, discontinued",
+    "compliance_values": "designed_for, tested_compliant, not_applicable, not_compliant"
+  }
+}

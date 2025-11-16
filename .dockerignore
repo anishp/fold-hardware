@@ -1,0 +1,42 @@
+# Docker ignore file - excludes files from Docker build context
+# (Not critical for docker-compose but good practice)
+
+# Docker-specific
+docker/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Backup files
+*-backups/
+*.bak
+*.backup
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Build artifacts
+*.o
+*.so
+*.dll
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
